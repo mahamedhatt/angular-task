@@ -1,0 +1,43 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="mb-3">
+            <label for="filterType" class="form-label fw-bold">Filter by</label>
+            <select class="form-select" id="filterType" [(ngModel)]="selectedFilter" (change)="filterTypeChanged()">
+                <option value="name">Name</option>
+                <option value="amount">Amount</option>
+            </select>
+        </div>
+        <div *ngIf="selectedFilter === 'name'" class="mb-3">
+            <label for="nameFilter" class="form-label fw-bold">Filter by Name</label>
+            <input type="text" class="form-control" id="nameFilter" placeholder="Filter by name"
+                [(ngModel)]="nameFilter" (input)="applyFilters()">
+        </div>
+        <div *ngIf="selectedFilter === 'amount'" class="mb-3">
+            <label for="amountFilter" class="form-label fw-bold">Filter by Amount</label>
+            <input type="number" class="form-control" id="amountFilter" placeholder="Filter by amount"
+                [(ngModel)]="amountFilter" (input)="applyFilters()">
+        </div>
+    </div>
+</div>
+
+
+<div class="container ">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Transaction Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of filteredTransactions">
+                <td>{{transaction.customer_id}}</td>
+                <td>{{ getCustomerName(transaction.customer_id) }}</td>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+<div class="container bg-body-tertiary">
+    <div>
+        <label for="" class="mb-3 fw-bold mt-5">Select the customer:</label>
+        <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="selectedCustomerId"
+            (change)="updateChart()">
+            <option *ngFor="let customer of customers" [value]="customer.id">
+                {{ customer.name }}
+            </option>
+        </select>
+    </div>
+
+    <div id="chart" class="mt-5">
+        <apx-chart #chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+            [yaxis]="chartOptions.yaxis" [title]="chartOptions.title"></apx-chart>
+    </div>
+</div>
